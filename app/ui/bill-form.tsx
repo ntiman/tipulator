@@ -11,8 +11,10 @@ export default function BillForm({ callback }: { callback: any }) {
   const [numberOfPeople, setNumberOfPeople] = useState<number>(1);
 
   // Watch udpates
+  // TODO: Check how to avoid using eslint-disable-next-line
   useEffect(() => {
     calculateTotal(billAmount, tipAmount, numberOfPeople);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [billAmount, tipAmount, numberOfPeople]);
 
   // TODO: manage billAmount and numberOfPeople being returned as string (should be done in Input compoennts)
@@ -23,10 +25,7 @@ export default function BillForm({ callback }: { callback: any }) {
   ) {
     let totalTipAmount = billAmount * tipAmount;
     let totalTipAmountPerPerson = totalTipAmount / numberOfPeople;
-    console.log('bill amount -> ', typeof(billAmount));
-    console.log('totalTipAmount -> ', typeof(totalTipAmount));
-    console.log('number of people -> ', typeof(numberOfPeople));
-    let totalPerPerson = (totalTipAmount + +billAmount)/+numberOfPeople;
+    let totalPerPerson = (totalTipAmount + +billAmount) / +numberOfPeople;
     callback({
       totalPerPerson: totalPerPerson,
       tipTotalPerPerson: totalTipAmountPerPerson,
@@ -34,18 +33,19 @@ export default function BillForm({ callback }: { callback: any }) {
   }
 
   const updateBillAmount = (value: number) => {
-    console.log("Updateing Bill Amount -> ", value);
-    setBillAmount(value);
+    value ? setBillAmount(value) : setBillAmount(0);
+  };
+
+  const setCustomTipAmount = (value: number) => {
+    value ? setTipAmount(value / 100) : setTipAmount(0);
   };
 
   const updateTipAmount = (value: number) => {
-    console.log("Updateing Tip Amount -> ", value);
-    setTipAmount(value);
+    value ? setTipAmount(value) : setTipAmount(0);
   };
 
   const updateNumberOfPeople = (value: number) => {
-    console.log("Updating number of people -> ", value);
-    setNumberOfPeople(value);
+    value ? setNumberOfPeople(value) : setNumberOfPeople(1);
   };
 
   return (
@@ -80,7 +80,7 @@ export default function BillForm({ callback }: { callback: any }) {
           type="number"
           placeholder="Custom"
           className="h-auto text-center"
-          callback={setTipAmount}
+          callback={setCustomTipAmount}
         />
       </div>
       <label className="mt-8">Number of people</label>
