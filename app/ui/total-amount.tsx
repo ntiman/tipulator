@@ -1,8 +1,8 @@
 import { Button } from "./button";
 
 export interface Props {
-  tipAmount: string;
-  totalAmount: string;
+  totalPerPerson: number,
+  tipTotalPerPerson: number
 }
 
 export default function TotalAmount({ props }: { props: Props }) {
@@ -13,14 +13,14 @@ export default function TotalAmount({ props }: { props: Props }) {
           <p>Tip amount</p>
           <small className="text-neutral-dark-grayish-cyan">/ per person</small>
         </span>
-        <span className="text-primary-strong-cyan text-3xl">${props.tipAmount}</span>
+        <span className="text-primary-strong-cyan text-3xl">${props.tipTotalPerPerson}</span>
       </div>
       <div className="flex justify-between mt-6">
         <span>
           <p>Total</p>
           <small className="text-neutral-dark-grayish-cyan">/ per person</small>
         </span>
-        <span className="text-primary-strong-cyan text-3xl">${props.totalAmount}</span>
+        <span className="text-primary-strong-cyan text-3xl">${props.totalPerPerson}</span>
       </div>
       <Button className="relative bottom-1">Reset</Button>
     </div>
