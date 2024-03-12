@@ -17,7 +17,7 @@ export function Input({ className, callback, ...rest }: InputProps) {
           "flex h-10 items-center rounded-md max-h-16 bg-neutral-very-light-grayish-cyan p-6",
           className
         )}
-        onChange={(e) => callback()}
+        onChange={(e) => callback(e.target.value)}
       ></input>
     </>
   );
